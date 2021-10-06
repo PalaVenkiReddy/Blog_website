@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+<!--this will just override the default title of this page-->
+{% block title %}
+{{ post.title }}
+{% endblock %}
+
+{% block content %}
+<br/>
+<h1> Add New Blog .... </h1>
+<br/>
+
+<!--to add the forms of the post model on our webpage-->
+
+<!--Don’t forget that a form’s output does not include the surrounding <form> tags, or the form’s submit control. You will have to provide these yourself.-->
+
+<!--when the form got submitted , the POST request which is sent to the server will contain the form data-->
+
+<div class="form-group">
+    <form method="POST" enctype="multipart/form-data"> <!--to allow our forms to accept the images into it-->
+        {% csrf_token %}  <!--csrf-Cross Site Request Forgeries - used to protect our site from hackers-->
+        {{ form.as_p }}  <!--{{ form.as_p }} will render them wrapped in <p> (paragraph) tags-->
+        <button class="btn btn-secondary">Submit</button>
+</div>
+<br/><br/><br/>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+
+<!--this will just override the default title of this page-->
+{% block title %}
+{{ post.place }}
+{% endblock %}
+
+{% block content %}
+
+
+{% if user.is_authenticated %}
+    <br/>
+    <center><h1> {{ post.place }} - {{ post.category }} </h1>    
+    Posted By: {{ post.author }}
+     <br/>
+    <br/>
+    <a href="{% url 'Edit_post' post.pk %}">
+        <button type="button" class="btn btn-primary btn-sm">Edit</button>
+    </a>    
+    <a href="{% url 'Delete_post' post.pk %}">
+        <button type="button" class="btn btn-secondary btn-sm">Delete</button>
+    </a>
+    <br/><br/>
+    {% if post.post_image %}
+    <img src="{{ post.post_image.url }}"> <br/><br/>
+    <!--by default django just discard the html in blog post but we include html in our blog and we include safe tag then it will allow html-->
+    {% endif %}
+    </center>
+    <font size="+2">{{ post.Description|safe }} </font>
+    <br/> <br/>
+    <center>
+        <a href="{% url 'home' %}" class="btn btn-secondary">Back
+        </a>
+    </center>
+    <br/> <br/> <br/>    
+{% else %}
+    <br/>
+    <strong> You're not Logged In <br/>
+    	If you want see the article then Click on <br/> <a href="{% url 'login' %}">Login</a>
+    </strong>
+
+{% endif %}    
+
+{% endblock %}	
+

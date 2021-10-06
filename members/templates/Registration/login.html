@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+<!--this will just override the default title of this page-->
+{% block title %}
+Login Page
+{% endblock %}
+
+{% block content %}
+<center>
+<br/><br/><br/><br/><br/>
+<h1> Login </h1>
+<br/>
+
+<!--to add the forms of the post model on our webpage-->
+
+<!--Don’t forget that a form’s output does not include the surrounding <form> tags, or the form’s submit control. You will have to provide these yourself.-->
+
+<!--when the form got submitted , the POST request which is sent to the server will contain the form data-->
+
+<div class="form-group">
+    <form method="POST">
+        {% csrf_token %}  <!--csrf-Cross Site Request Forgeries - used to protect our site from hackers-->
+        {{ form.as_p }}  <!--{{ form.as_p }} will render them wrapped in <p> (paragraph) tags-->   
+        <button class="btn btn-secondary">Login</button>
+        <a href="{% url 'Register' %}" class="btn btn-secondary">Back
+        </a>
+    </form>
+        
+</div>
+
+</center>
+{% endblock %}

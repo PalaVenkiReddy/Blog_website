@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<br/>
+<h1> <strong><font size = +3><center> Tourist Places Across the world</center></font></strong> </h1>
+<br/>
+<!--since we have mentioned particular model  in the views.py we can directly access the objects of that model-->
+{% for post in object_list %}
+    <a href="{% url 'Article-details' post.pk %}">
+        <strong><font size="+3">{{ post.place }} </font></strong>
+    </a>&nbsp&nbsp&nbsp<small>{{ post.post_date }} </small>
+    <br/>
+    <!--we can also use fields like first_name, last_name, email to the author field since we designed author to be as user -->
+
+
+    <li> <font size="+2">Tourist-Place: {{ post.place }} - {{ post.category }}</font>  
+    </li> 
+    <li> <font size="+2">Author: <strong>{{ post.author }}</strong></font></li>
+    <li> <font size="+2">Description : {{ post.Description|slice:":300"| safe }} ....</font></li><!--to have a small snippet of 200 characters on home page -->
+    <small>
+        {% if user.is_authenticated %}
+            <a href="{% url 'Edit_post' post.pk %}">
+                <button type="button" class="btn btn-primary btn-sm">Edit</button>
+            </a>
+            
+            <a href="{% url 'Delete_post' post.pk %}">
+                <button type="button" class="btn btn-secondary btn-sm">Delete</button>
+            </a>
+        {% endif %}   
+    </small>
+    <br/>
+    <br/>  
+{% endfor %}
+
+
+{% endblock %}

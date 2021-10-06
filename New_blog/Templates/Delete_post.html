@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Delete the {{ post.place }}
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <br/>
+    <h1> Delete the {{ post.place }} </h1>
+    <br/>
+    <h2> <strong>Are You Sure?</strong></h2>
+    <br/><br/><br/>
+    <form method="POST">
+        {% csrf_token %}  
+        <button class="btn btn-secondary">Delete</button>
+{% else %}
+    <strong> You're not Logged In <br/>
+        If you want see the article then Click on <br/> <a href="{% url 'login' %}">Login</a>
+    </strong>
+{% endif %}
+<a href="{% url 'home' %}" class="btn btn-secondary">
+    Back
+</a>    
+{% endblock %}
